@@ -60,11 +60,11 @@ class Customer
    WHERE customer_id = $1"
    values = [@id]
    films = SqlRunner.run(sql, values)
-   return Customer.map_items(films)
+   return Film.map_items(films)
  end
 
-  def self.map_items(customer_data)
+ def self.map_items(customer_data)
     return customer_data.map { |customer| Customer.new(customer) }
-  end
+ end
 
 end

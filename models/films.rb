@@ -60,7 +60,7 @@ end
     WHERE film_id = $1"
     values = [@id]
     customers = SqlRunner.run(sql, values)
-    return Film.map_items(customers)
+    return Customer.map_items(customers)
   end
 
   def self.map_items(film_data)
