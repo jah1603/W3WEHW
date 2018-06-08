@@ -63,6 +63,25 @@ class Customer
    return Film.map_items(films)
  end
 
+ def buy_ticket(film)
+   sql = "SELECT films.* FROM films WHERE id = $1"
+   values = [film.id]
+   purchase = SqlRunner.run(sql, values)[0]
+   self.funds -= purchase['price'].to_i()
+   self.update
+   ticket = Ticket.new({
+     'customer_id' => self.id,
+     'film_id' => film.id
+   } )
+   ticket.save()
+ end
+
+ def number_of_tickets()
+   sql = "SELECT tickets.* FROM tickets WHERE customer_id = $1"
+   values = [@id]
+   SqlRunner.run(sql, values).ntuples
+ end
+
  def self.map_items(customer_data)
     return customer_data.map { |customer| Customer.new(customer) }
  end
