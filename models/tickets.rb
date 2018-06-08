@@ -48,6 +48,20 @@ class Ticket
     SqlRunner.run(sql)
   end
 
+  # def location()
+  #   sql = "SELECT * FROM locations WHERE id = $1"
+  #   values = [@location_id]
+  #   location = SqlRunner.run(sql, values).first
+  #   return Location.new(location)
+  # end
+  #
+  # def user()
+  #   sql = "SELECT * FROM users where id = $1"
+  #   values = [@user_id]
+  #   user = SqlRunner.run(sql, values).first
+  #   return User.new(user)
+  # end
+
   def self.map_items(ticket_data)
     return ticket_data.map { |ticket| Ticket.new(ticket) }
   end
